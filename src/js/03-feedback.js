@@ -27,7 +27,7 @@ function onInputValue(e) {
 
 function checkLocalStorage() {
   if (localStorage.getItem(STORAGE_KEY)) {
-    for (elem in locStrForJS) {
+    for (const elem in locStrForJS) {
       if (emailRef.name === elem) {
         emailRef.value = locStrForJS[elem];
       }
