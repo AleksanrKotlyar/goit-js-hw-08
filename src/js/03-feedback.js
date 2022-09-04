@@ -9,15 +9,15 @@ formRef.addEventListener('submit', onFormSubmit);
 
 let storage = {};
 const STORAGE_KEY = 'feedback - form - state';
-const locStrForJS = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
 checkLocalStorage();
 
 function onFormSubmit(e) {
   e.preventDefault();
   e.target.reset();
-  localStorage.removeItem(STORAGE_KEY);
   console.log(storage);
+  localStorage.removeItem(STORAGE_KEY);
+  storage = {};
 }
 
 function onInputValue(e) {
@@ -27,11 +27,10 @@ function onInputValue(e) {
 
 function checkLocalStorage() {
   if (localStorage.getItem(STORAGE_KEY)) {
-    for (const elem in locStrForJS) {
-      if (emailRef.name === elem) {
-        emailRef.value = locStrForJS[elem];
-      }
-      msgRef.value = locStrForJS[elem];
-    }
+    const locStrForJS = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    Object.entries(locStrForJS).forEach(([name, value]) => {
+      storage[name] = value;
+      formRef.elements[name].value = value;
+    });
   }
 }
