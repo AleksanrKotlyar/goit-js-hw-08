@@ -1,8 +1,6 @@
 const throttle = require('lodash.throttle');
 
 const formRef = document.querySelector('.feedback-form');
-const emailRef = document.querySelector('[name="email"]');
-const msgRef = document.querySelector('[name="message"]');
 
 formRef.addEventListener('input', throttle(onInputValue, 500));
 formRef.addEventListener('submit', onFormSubmit);
